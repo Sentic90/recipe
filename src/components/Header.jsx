@@ -23,7 +23,6 @@ const Header = ({ onSearchQuery }) => {
             type="text"
             placeholder="Find a receipe..."
             value={searchQuery}
-            onKeyDown="enter"
             onChange={(event) => setSearchQuery(event.currentTarget.value)}
           />
           <button onClick={handleSearchParam}>Search</button>

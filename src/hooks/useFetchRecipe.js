@@ -1,15 +1,5 @@
-import React, { useEffect, useState, useReducer } from "react";
-import axios from "axios";
-
-const options = {
-  method: "GET",
-  url: "https://tasty.p.rapidapi.com/recipes/get-more-info",
-  params: { id: "8138" },
-  headers: {
-    "x-rapidapi-key": "b66db239ddmsh9b764abe129f473p15420bjsn48f30497ffe0",
-    "x-rapidapi-host": "tasty.p.rapidapi.com",
-  },
-};
+import { useReducer } from "react";
+import httpService from "../services/httpService";
 
 const initialState = {
   data: null,
@@ -57,8 +47,9 @@ const useFetchRecipe = () => {
     dispatch({ type: ACTION.FETCHING_DATA });
 
     try {
-      options.params.id = id;
-      const response = await axios.request(options);
+      const response = await httpService.get("/recipes/get-more-info", {
+        params: { id },
+      });
       const { data } = response;
 
       dispatch({ type: ACTION.FETCH_SUCCESS, payload: data });
